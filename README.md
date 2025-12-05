@@ -1,2 +1,2 @@
 # PlusBlog
-This is PlusBlog,a high-availablity blog system.
+This is PlusBlog, an intelligent and high-performance blog system，thanks for your contribution＆suggestion.
