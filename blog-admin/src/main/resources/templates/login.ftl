@@ -8,7 +8,7 @@
     <title>${config.siteName}后台管理系统</title>
     <link href="/assets/images/favicon.ico" rel="icon">
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" async>
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/jquery-confirm.min.css" rel="stylesheet">
     <link href="/assets/css/nprogress.min.css" rel="stylesheet">
     <link href="/assets/css/zhyd.core.css" rel="stylesheet">

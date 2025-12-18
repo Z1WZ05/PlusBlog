@@ -251,5 +251,21 @@ public class Article {
         Integer loveCount = this.bizArticle.getLoveCount();
         return loveCount == null ? 0 : loveCount;
     }
+
+    public Article setLookCount(int count) {
+        this.bizArticle.setLookCount(count);
+        return this;
+    }
+
+    public Article setCommentCount(int count) {
+        this.bizArticle.setCommentCount(count);
+        return this;
+    }
+
+    public Article setLoveCount(int count) {
+        this.bizArticle.setLoveCount(count);
+        return this;
+    }
 }
+
 

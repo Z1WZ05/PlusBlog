@@ -6,7 +6,6 @@
 #
 ###################################  readme  ###################################
 
-
 # 20250301
 -- ----------------------------
 -- Table structure for biz_article_content
@@ -33,7 +32,7 @@ INSERT INTO biz_article_content ( id, article_id, content, content_md, create_ti
     create_time,
     update_time
 FROM
-    biz_article
+    biz_article;
 
 -- 迁移完成后删除旧字段（如果要求不停服迁移，则需要在新版服务升级后再执行以下脚本）
 /*ALTER TABLE `biz_article`

@@ -12,24 +12,41 @@
                 <li><a href="${config.siteUrl}/links" class="menu_a" title="友情链接" data-toggle="tooltip" data-placement="bottom">友情链接</a></li>
                 <li><a href="${config.siteUrl}/guestbook" class="menu_a" title="友情链接" data-toggle="tooltip" data-placement="bottom">留言板</a></li>
             </ul>
-            <#if user??>
-                <ul class="list-unstyled list-inline nav navbar-nav">
+            <!-- ===================================================================== -->
+            <!-- 👇 修复版：右侧用户菜单 (修复对齐，修复双重显示) 👇 -->
+            <!-- ===================================================================== -->
+            <ul class="list-unstyled list-inline pull-left">
+
+                <#-- 情况1：未登录 -->
+                <#if !Session["user"]??>
+                    <li style="line-height: 35px;">
+                        <a href="/login" style="padding-top: 50px; padding-bottom: 15px;">登录</a>
+                    </li>
+                    <li style="line-height: 35px;">
+                        <a href="/register" style="padding-top: 50px; padding-bottom: 15px;">注册</a>
+                    </li>
+                <#else>
+                <#-- 情况2：已登录 -->
+                    <#assign currentUser = Session["user"]>
+
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle menu_a" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user fa-fw"></i>${user.username!} <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="/oauth/logout"><i class="fa fa-sign-out"></i>退出</a></li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px; padding-bottom: 15px;">
+                            <#-- 头像 -->
+                            <img src="${(currentUser.avatar)!('/assets/img/default-avatar.png')}"
+                                 style="width: 24px; height: 24px; border-radius: 50%; margin-right: 5px; vertical-align: top; margin-top: -2px;">
+
+                            <#-- 只显示账号名 (username) -->
+                            <span>${currentUser.username}</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/profile"><i class="fa fa-user"></i> 个人中心</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout"><i class="fa fa-sign-out"></i> 退出登录</a></li>
                         </ul>
                     </li>
-                </ul>
-            <#else>
-            <@zhydTag method="listAvailableOAuthPlatforms">
-            <#if listAvailableOAuthPlatforms?? && listAvailableOAuthPlatforms?size gt 0>
-                <ul class="list-unstyled list-inline pull-left">
-                    <li><a href="javascript:;;" data-toggle="modal" data-target="#oauth" rel="nofollow" title="授权登录">登录</a></li>
-                </ul>
-            </#if>
-                </@zhydTag>
-            </#if>
+                </#if>
+            </ul>
         </div>
     </div>
 </nav>

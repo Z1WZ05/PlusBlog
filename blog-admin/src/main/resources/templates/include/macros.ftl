@@ -12,7 +12,7 @@
     <#if config.adminCssCdn?? && (config.adminCssCdn?length > 0)>
         ${config.adminCssCdn!}
     <#else >
-        <link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" async>
+        <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="/assets/css/jquery-confirm.min.css" rel="stylesheet">
         <link href="/assets/css/jquery.fancybox.min.css" rel="stylesheet">

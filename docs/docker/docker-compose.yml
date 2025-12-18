@@ -43,53 +43,53 @@ services:
     networks:
       - oneblog
 
-  # admin 服务
-  blog-admin:
-    image: justauth/blog-admin
-    build: ../../blog-admin
-    restart: always
-    container_name: blog-admin
-    hostname: blog-admin
-    env_file:
-      - .env
-    volumes:
-      - ${ONEBLOG_APP_DIR}:/var/tmp/oneblog
-    depends_on:
-      blog-redis:
-        condition: service_healthy
-      blog-mysql:
-        condition: service_healthy
-    links:
-      - blog-redis
-      - blog-mysql
-    ports:
-      - 8085:8085
-    networks:
-      - oneblog
+#  # admin 服务
+#  blog-admin:
+#    image: justauth/blog-admin
+#    build: ../../blog-admin
+#    restart: always
+#    container_name: blog-admin
+#    hostname: blog-admin
+#    env_file:
+#      - .env
+#    volumes:
+#      - ${ONEBLOG_APP_DIR}:/var/tmp/oneblog
+#    depends_on:
+#      blog-redis:
+#        condition: service_healthy
+#      blog-mysql:
+#        condition: service_healthy
+#    links:
+#      - blog-redis
+#      - blog-mysql
+#    ports:
+#      - 8085:8085
+#    networks:
+#      - oneblog
 
   # admin 服务
-  blog-web:
-    image: justauth/blog-web
-    build: ../../blog-web
-    restart: always
-    container_name: blog-web
-    hostname: blog-web
-    env_file:
-      - .env
-    volumes:
-      - ${ONEBLOG_APP_DIR}:/var/tmp/oneblog
-    depends_on:
-      blog-redis:
-        condition: service_healthy
-      blog-mysql:
-        condition: service_healthy
-    links:
-      - blog-redis
-      - blog-mysql
-    ports:
-      - 8443:8443
-    networks:
-      - oneblog
+  # blog-web:
+  # image: justauth/blog-web
+  #  build: ../../blog-web
+  #  restart: always
+  # container_name: blog-web
+  # hostname: blog-web
+  #  env_file:
+  #    - .env
+  #  volumes:
+  #    - ${ONEBLOG_APP_DIR}:/var/tmp/oneblog
+  #  depends_on:
+  #    blog-redis:
+  #      condition: service_healthy
+  #    blog-mysql:
+  #      condition: service_healthy
+  #  links:
+  #   - blog-redis
+  #    - blog-mysql
+  #  ports:
+  #    - 8443:8443
+  #  networks:
+  #    - oneblog
 
 networks:
   oneblog:
