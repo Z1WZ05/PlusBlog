@@ -39,7 +39,9 @@ spring:
         expose-spring-macro-helpers: true
         prefer-file-system-access: true
         suffix: .ftl
-        template-loader-path: classpath:/templates/
+        template-loader-path:
+            file:C:\Users\IMUN\Desktop\code\java\untitled1\blog-web\src\main\resources\templates
+
         settings:
             template_update_delay: 0
             default_encoding: UTF-8
@@ -60,5 +62,12 @@ spring:
                 content:
                     enabled: true
                     paths: /**
+        static-locations: classpath:/static/,file:src/main/resources/static/
     banner:
         charset: UTF-8
+    web:
+        resources:
+            cache:
+                cachecontrol:
+                    no-store: true
+            static-locations: classpath:/static/

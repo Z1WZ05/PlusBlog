@@ -6,6 +6,75 @@
     canonical="/${url!}">
 </@header>
 
+<#if url == "index">
+        <div class="home-hero">
+            <div class="hero-bg"
+                 data-bg1="${config.staticWebSite}/img/bg/241122.png"
+                 data-bg2="${config.staticWebSite}/img/bg/230910.png"
+                 data-bg3="${config.staticWebSite}/img/bg/230412.jpg">
+                <img src="${config.staticWebSite}/img/bg/241122.png">
+            </div>
+
+            <div class="hero-mask"></div>
+            <div class="hero-info">
+                <h1 class="glitch hero-title" data-text="Hi! OneBlog">
+                    Hi! OneBlog
+                </h1>
+
+                <div class="header-info">
+                    <p>OneBlog是一款简洁美观、自适应的Java博客系统</p>
+                    <ul class="contact-list">
+                        <li class="bg-pre auto-shake tag-icon">
+                            <img class="flipx" src="${config.siteUrl}/img/icon/next-b.svg">
+                        </li>
+
+                        <#if config.github?? && (config.github?length > 0)>
+                            <li class="github auto-shake">
+                                <a class="tag-icon" href="${config.github}" title="点击查看我的github" target="_blank" rel="external nofollow">
+                                    <img src="${config.siteUrl}/img/icon/github-logo_icon-icons.com_73546.png" alt="Github">
+                                </a>
+                            </li>
+                        </#if>
+                        <#if config.wxCode?? && (config.wxCode?length > 0)>
+                            <li class="weixin auto-shake" data-container="body"
+                                data-toggle="popover" data-trigger="hover" data-placement="bottom" data-html="true" data-content="<img src='${config.wxCode}' style='width: 130px;' alt='QR Code'>">
+                                <a class="tag-icon"  title="微信" rel="external nofollow"><img src="${config.siteUrl}/img/icon/wechat_logo_icon_229288.png" alt="微信"></a>
+                            </li>
+                        </#if>
+                        <#if config.qq?? && (config.qq?length > 0)>
+                            <li class="tqq auto-shake">
+                                <a class="tag-icon" href="javascript:window.open('tencent://message/?uin=${config.qq}&Site=www.${config.domain}&Menu=yes')" title="点击QQ联系我" target="blank" rel="external nofollow">
+                                    <img src="${config.siteUrl}/img/icon/icons8-tencent-qq-24.png" alt="QQ">
+                                </a>
+                            </li>
+                        </#if>
+                        <#if config.weibo?? && (config.weibo?length > 0)>
+                            <li class="tsina auto-shake">
+                                <a class="tag-icon" href="${config.weibo}" title="点击查看我的微博" target="_blank" rel="external nofollow">
+                                    <img src="${config.siteUrl}/img/icon/weibo_logo_icon_147206.png" alt="微博">
+                                </a>
+                            </li>
+                        </#if>
+
+                        <#if config.zhihu?? && (config.zhihu?length > 0)>
+                            <li class=" auto-shake">
+                                <a class="tag-icon" href="${config.zhihu}" title="点击查看我的知乎" target="_blank" rel="external nofollow">
+                                    <img src="${config.siteUrl}/img/icon/zhihu.png" alt="知乎">
+                                </a>
+                            </li>
+                        </#if>
+                        <li class="bg-next auto-shake tag-icon">
+                            <img  src="${config.siteUrl}/img/icon/next-b.svg">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="hero-scroll">
+                <span></span>
+            </div>
+        </div>
+</#if>
+
 <div class="container custome-container">
     <#-- 广告位 -->
     <div class="ad-mark" id="HOMEPAGE_TOP" style="display: none;margin-bottom: 10px"></div>
@@ -188,3 +257,7 @@
     </script>
 </@footer>
 </@compress>
+<script>
+    window.STATIC_SITE = "${config.staticWebSite}";
+</script>
+<script src="${config.siteUrl}/js/custom.js"></script>

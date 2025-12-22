@@ -62,7 +62,7 @@ ul, ol {
 }
 
 body {
-    padding-top: 65px;
+    padding-top: 0;
     font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
     font-size: 14px;
     color: #333;
@@ -897,7 +897,14 @@ span.separation:AFTER {
     border-right: 1px solid #ddd;
     border-radius: 2px 0 0 0;
 }
-
+.tag-icon{
+    cursor: pointer;
+}
+.tag-icon img{
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
 /* 右侧目录框 end */
 
 .link-info {
@@ -2027,7 +2034,6 @@ nav a:first-child .meta-nav {
 
 /* 主导航栏 */
 #mainmenu {
-    top: 30px;
     z-index: 998;
 }
 
@@ -2226,11 +2232,11 @@ nav a:first-child .meta-nav {
     }
 
     #topmenu {
-        display: block;
+        display: none;
     }
 
     #mainmenu {
-        top: 30px;
+        top: 0;
     }
 
     .toggle-search {
@@ -2392,7 +2398,7 @@ nav a:first-child .meta-nav {
 }
 
 #feed_widget a.tag-icon {
-    color: #999;
+    color: red;
     width: 40px;
     display: block;
     text-align: center;
@@ -2737,7 +2743,7 @@ nav a:first-child .meta-nav {
 
 #share .fa-weixin:hover {
     background: #006f1d !important;
-    color: #fff !important;
+    color: red !important;
 }
 
 .bd_weixin_popup {
@@ -3726,4 +3732,33 @@ div.scrollmenu a.active, div.scrollmenu a:hover {
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+
+
+/* ===== 博客主体容器 ===== */
+.site-content,
+.blog-content,
+#content {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+/* ===== 博客文章卡片 ===== */
+.post,
+.post-item,
+article {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 30px 35px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all .3s ease;
+}
+
+.post:hover,
+.post-item:hover,
+article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }

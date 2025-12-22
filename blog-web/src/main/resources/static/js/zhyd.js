@@ -120,36 +120,52 @@ function initArticeMenu() {
     });
 }
 
+// function initScrollMenu() {
+//     var topmenu = $("#topmenu"); //得到导航对象
+//     var mainmenu = $("#mainmenu"); //得到导航对象
+//     var win = $(window); //得到窗口对象
+//     var sc = $(document);//得到document文档对象。
+//     var am = $(".article-module");// 文章目录对象
+//     bindScroll();
+//     win.scroll(function () {
+//         bindScroll();
+//     });
+//
+//     function bindScroll() {
+//         if (sc.scrollTop() >= 100) {
+//             if (!mainmenu.hasClass("transparent")) {
+//                 topmenu.animate({opacity: '0'}, 0);
+//                 mainmenu.addClass('transparent');
+//                 if (win.width() > 768) {
+//                     mainmenu.animate({top: '0', 'z-index': 1000}, 1);
+//                 }
+//             }
+//         } else {
+//             topmenu.animate({opacity: '1'}, 0);
+//             mainmenu.removeClass('transparent');
+//             if (win.width() > 768) {
+//                 mainmenu.animate({top: '30', 'z-index': 998}, 1);
+//             }
+//         }
+//     }
+// }
 function initScrollMenu() {
-    var topmenu = $("#topmenu"); //得到导航对象
-    var mainmenu = $("#mainmenu"); //得到导航对象
-    var win = $(window); //得到窗口对象
-    var sc = $(document);//得到document文档对象。
-    var am = $(".article-module");// 文章目录对象
-    bindScroll();
-    win.scroll(function () {
-        bindScroll();
-    });
+    var mainmenu = $("#mainmenu");
+    mainmenu.removeAttr("style");
 
-    function bindScroll() {
-        if (sc.scrollTop() >= 100) {
-            if (!mainmenu.hasClass("transparent")) {
-                topmenu.animate({opacity: '0'}, 0);
-                mainmenu.addClass('transparent');
-                if (win.width() > 768) {
-                    mainmenu.animate({top: '0', 'z-index': 1000}, 1);
-                }
+    $(window).scroll(function () {
+        var sc = $(document).scrollTop();
+        if (sc >= 50) {
+            // 下滑状态
+            if (!mainmenu.hasClass("nav-fixed")) {
+                mainmenu.addClass('nav-fixed');
             }
         } else {
-            topmenu.animate({opacity: '1'}, 0);
-            mainmenu.removeClass('transparent');
-            if (win.width() > 768) {
-                mainmenu.animate({top: '30', 'z-index': 998}, 1);
-            }
+            // 初始顶端状态
+            mainmenu.removeClass('nav-fixed');
         }
-    }
+    });
 }
-
 var PaymentUtils = window.payment || {
     config: [{url: appConfig.zfbPraiseCode, desc: '支付宝转账'}, {url: appConfig.wxPraiseCode, desc: '微信转账'}],
     show: function () {
