@@ -354,3 +354,9 @@
     transform: scale(1.05);
 }
 
+/* 针对导航栏链接的 hover 进行精准覆盖 */
+.navbar-default .menu-box .navbar-collapse ul li a:hover,
+.navbar-default .menu-box .navbar-collapse ul li .menu_a:hover,
+.nav-fixed .menu_a:hover {
+    color: #fe9600 !important; /* 确保悬停时变成 Sakura 的橙色 */
+}

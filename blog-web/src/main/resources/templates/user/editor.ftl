@@ -7,16 +7,73 @@
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         body { background-color: #f5f5f5; padding-top: 20px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-        .editor-container { background: #fff; padding: 30px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.1); min-height: 80vh; max-width: 1000px; margin: 0 auto; position: relative; }
+        .editor-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 1100px;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f9f9f9;
+        }
+        .btn-primary {
+            background-color: #ff6d6d !important;
+            border-color: #ff6d6d !important;
+            border-radius: 20px; /* 圆角按钮 */
+            padding: 6px 20px;
+        }
+
+        .btn-warning {
+            background-color: #fe9600 !important;
+            border-color: #fe9600 !important;
+            border-radius: 20px;
+        }
+
+        .btn-default {
+            border-radius: 20px;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+            transition: all 0.3s;
+        }
         .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;}
         .article-title { flex: 1; border: none; font-size: 24px; font-weight: bold; outline: none; margin-right: 20px; height: 40px; background: transparent;}
 
         #editor { z-index: 10; position: relative; }
-        .w-e-toolbar { border: 1px solid #ccc !important; border-bottom: none !important; border-radius: 4px 4px 0 0; background-color: #fcfcfc !important; flex-wrap: wrap;}
-        .w-e-text-container { border: 1px solid #ccc !important; border-radius: 0 0 4px 4px; min-height: 600px !important; z-index: 100 !important;}
 
         .option-label { margin-right: 15px; font-weight: normal; cursor: pointer;}
         .tag-checkbox { margin-right: 5px; }
+        /* 文章标题输入框 */
+        .article-title {
+            border-bottom: 2px solid #eee !important;
+            transition: border-color 0.3s;
+        }
+
+        .article-title:focus {
+            border-bottom-color: #ff6d6d !important;
+        }
+
+        /* 圆角 */
+        .form-control, .input-group-addon {
+            border-radius: 10px !important;
+            border: 1px solid #eee !important;
+        }
+
+        .form-control:focus {
+            border-color: #fe9600 !important; /* 焦点变橙色 */
+            box-shadow: 0 0 8px rgba(254, 150, 0, 0.1) !important;
+        }
+
+        .tag-checkbox:checked {
+            accent-color: #ff6d6d;
+        }
+
     </style>
 </head>
 <body>

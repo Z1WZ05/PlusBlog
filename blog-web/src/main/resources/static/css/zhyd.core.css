@@ -6,6 +6,26 @@
  * @date 2017-04-01
  * @since 1.0
  */
+
+body {
+    cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/normal.cur), auto;
+}
+
+a:hover , img:hover , li:hover,span:hover,h2:hover{
+    cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/ayuda.cur), pointer;
+}
+/* 1. 定义动画 */
+@keyframes main-fade-in {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. 应用到主体内容容器 */
+.blog-body {
+    animation: main-fade-in 1s; /* 使文章列表向上滑入 */
+}
+
+
 .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
     position: relative;
     min-height: 1px;
@@ -114,8 +134,8 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 .nav-search-box .nav-search-btn:hover, .nav-search:hover, .link-info .auto-link-btn:hover {
     color: #fff !important;
-    background-color: #006741 !important;
-    /*border-color: #00432a !important;*/
+    background-color: orange !important; /* 将原有的深绿色改为橙色 */
+    border-color: orange !important;
 }
 
 /* 搜索框 */
@@ -303,15 +323,23 @@ fieldset legend {
 }
 
 blockquote {
-    text-indent: 0;
-    padding: 10px 20px;
-    margin: 0 0 15px;
-    color: #555;
-    font-size: 1em;
-    background-color: #f5f5f5;
-    border-left: 4px solid #ccc;
+    padding: 30px 60px; /* 增加内边距给图标留位置 */
+    position: relative;
+    background: #f7f7f7;
+    border: none; /* 去掉原本的左边框 */
 }
 
+/* 添加左上角大括号图标 */
+blockquote:before {
+    content: "\f10d" !important;
+    font-family: FontAwesome;
+    font-size: 3rem;
+    position: absolute;
+    top: -15px;
+    left: 12px;
+    color: orange;
+    opacity: 0.2; /* 设置半透明防止遮挡文字 */
+}
 .blog-info-body p {
     text-indent: 0;
     line-height: 1.5;
@@ -403,14 +431,14 @@ pre {
 
 /* 鼠标聚焦状态 */
 a:hover {
-    color: #006741 !important;
+    color: #fe9600 !important;
     /*font-weight: bold;*/
     text-decoration: none;
 }
 
 a {
-    color: #333;
-    text-decoration: none;
+    color: rgb(153, 153, 153);
+    transition: color .2s ease-out; /* 添加平滑过渡 */
 }
 
 a:-webkit-any-link {
@@ -723,7 +751,7 @@ span.separation:AFTER {
 }
 
 ::selection {
-    background: #017E66;
+    background: #444;
     color: #fff;
 }
 
