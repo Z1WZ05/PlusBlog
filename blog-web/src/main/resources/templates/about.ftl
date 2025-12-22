@@ -1,7 +1,10 @@
 <#include "include/macros.ftl">
 <@compress single_line=false>
-<@header title="关于 | ${config.siteName}" description="关于${config.siteName}" canonical="/about"></@header>
-
+    <@header title="${config.siteName!}"
+    keywords="${config.homeKeywords!}"
+    description="${config.homeDesc!}"
+    canonical="/${url!}">
+    </@header>
 <div class="container custome-container">
     <nav class="breadcrumb">
         <a class="crumbs" title="返回首页" href="${config.siteUrl}" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-home"></i>首页</a>

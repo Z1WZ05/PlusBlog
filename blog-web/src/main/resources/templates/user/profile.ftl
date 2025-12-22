@@ -1,82 +1,6 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>个人中心 - ${config.siteName!"OneBlog"}</title>
+<#include "/include/macros.ftl">
+<@header title="关于 | ${config.siteName}" description="关于${config.siteName}" canonical="/about"></@header>
 
-    <!-- 引入 Bootstrap 和 FontAwesome CDN -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <style>
-        /* ============ 核心修复：强制修正导航栏样式 ============ */
-        .navbar-header { float: left; }
-        .navbar-collapse { display: block !important; height: auto !important; padding-bottom: 0; overflow: visible !important; }
-        .navbar-nav { float: left; margin: 0; }
-        .navbar-nav>li { float: left; }
-        .navbar-right { float: right !important; margin-right: -15px; }
-        .navbar-brand { height: 50px; padding: 15px 15px; font-size: 18px; line-height: 20px; }
-        .navbar-brand img { display: inline-block; max-height: 25px; margin-right: 5px; margin-top: -3px;}
-
-        /* 隐藏原版 header 中可能导致大标题乱跑的元素 */
-        .site-desc { display: none; }
-
-        /* 隐藏头部多余的搜索按钮，防止显示两个放大镜 */
-        .nav-search, .main-search, .toggle-search { display: none !important; }
-
-        /* 微调导航栏高度，防止撑开 */
-        .navbar-nav>li>a { padding-top: 15px; padding-bottom: 15px; }
-        /* ============ 修复结束 ============ */
-
-        body { background-color: #f0f2f5; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-
-        /* 个人中心容器 */
-        .main-container { margin-top: 80px; margin-bottom: 50px; }
-
-        /* 卡片通用样式 */
-        .box-card { background: #fff; border-radius: 4px; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); margin-bottom: 20px; overflow: hidden;}
-        .box-header { padding: 15px 20px; border-bottom: 1px solid #f6f6f6; font-size: 16px; font-weight: bold; color: #333; }
-        .box-body { padding: 20px; }
-
-        /* 左侧头像区 */
-        .user-cover { background: url('https://cdn.bootcdn.net/ajax/libs/trianglify/2.0.0/trianglify.min.js') center/cover; height: 100px; background-color: #409EFF;}
-        .user-info-inner { text-align: center; margin-top: -50px; }
-
-        /* 头像样式优化：增加遮罩提示 */
-        .avatar-wrapper { position: relative; width: 100px; height: 100px; margin: 0 auto; border-radius: 50%; overflow: hidden; border: 4px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.1); cursor: pointer; }
-        .user-avatar { width: 100%; height: 100%; object-fit: cover; }
-        .avatar-mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); color: #fff; line-height: 100px; text-align: center; opacity: 0; transition: opacity 0.3s; }
-        .avatar-wrapper:hover .avatar-mask { opacity: 1; }
-
-        .user-name { margin-top: 10px; font-size: 18px; font-weight: 600; }
-        .user-bio { color: #999; font-size: 13px; margin-top: 5px; padding: 0 15px; }
-
-        /* 资料展示区 (View Mode) */
-        .profile-view-item { margin-bottom: 20px; border-bottom: 1px dashed #eee; padding-bottom: 15px; }
-        .profile-view-item:last-child { border-bottom: none; }
-        .view-label { color: #909399; width: 80px; display: inline-block; font-weight: normal; }
-        .view-value { color: #303133; font-weight: 500; }
-
-        /* 文章列表 */
-        .article-item { padding: 15px 0; border-bottom: 1px solid #eee; position: relative; }
-        .article-item:last-child { border-bottom: none; }
-        .article-title { font-size: 16px; color: #333; text-decoration: none; display: block; margin-bottom: 8px; max-width: 80%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-        .article-title:hover { color: #409EFF; }
-        .article-meta { font-size: 12px; color: #999; }
-        .status-badge { padding: 2px 6px; border-radius: 3px; font-size: 12px; transform: scale(0.9); display: inline-block;}
-        .status-success { background: #f0f9eb; color: #67c23a; border: 1px solid #e1f3d8; }
-        .status-draft { background: #f4f4f5; color: #909399; border: 1px solid #e9e9eb; }
-
-        /* 文章操作按钮组 */
-        .article-actions { position: absolute; right: 0; top: 15px; }
-    </style>
-</head>
-<body>
-
-<!-- 引入公共头部 -->
-<#include "/layout/header.ftl">
 
 <div class="container main-container">
     <div class="row">
@@ -230,10 +154,10 @@
     </div>
 </div>
 
+    <@footer></@footer>
+
 <!-- JS -->
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/layer/3.5.1/layer.min.js"></script>
+
 
 <script>
     // 切换 查看/编辑 模式
@@ -348,5 +272,3 @@
         });
     }
 </script>
-</body>
-</html>

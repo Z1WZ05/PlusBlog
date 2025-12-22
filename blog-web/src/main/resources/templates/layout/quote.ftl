@@ -13,3 +13,4 @@
     <link href="${config.staticWebSite}/css/zhyd.comment.css" rel="stylesheet" type="text/css">
     <link href="${config.staticWebSite}/css/custom.css" rel="stylesheet" type="text/css">
     <link href="${config.staticWebSite}/css/blog.css" rel="stylesheet" type="text/css">
+    <link href="${config.staticWebSite}/css/profile.css" rel="stylesheet" type="text/css">
