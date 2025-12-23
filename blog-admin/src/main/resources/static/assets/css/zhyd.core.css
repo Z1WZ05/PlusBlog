@@ -1030,7 +1030,8 @@ footer {
 }
 
 .tooltip {
-    display: block !important
+    display: block !important;
+    background-color: orange;
 }
 
 .tiles {

@@ -172,9 +172,9 @@
                                 <span class="art art-top"><i class="fa fa-chevron-circle-up fa-fw"></i>置顶</span>
                             </#if>
                             <span class="art art-type"><a href="${config.siteUrl}/type/${item.typeId?c}"><i class="${item.type.icon!} fa-fw"></i> ${item.type.name}</a></span>
-                            <h2 class="entry-title">
-                                <a href="${config.siteUrl}/article/${item.id?c}" rel="bookmark" title="${item.title}" data-toggle="tooltip" data-placement="bottom">${item.title}</a>
-                            </h2>
+                            <span><a href="${config.siteUrl}/article/${item.id?c}" rel="bookmark"><h2 class="entry-title">
+                                ${item.title}
+                            </h2></a></span>
                         </header>
                         <div class="entry-content">
                             <div class="archive-content">
@@ -182,8 +182,8 @@
                             </div>
                             <span class="entry-meta">
                                 <span class="date" title="文章发表日期" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-clock-o fa-fw"></i>${item.createTime?string('yyyy-MM-dd')}</span>
-                                <span class="views" title="文章阅读次数" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-eye fa-fw"></i>浏览(${item.lookCount!(0)})</span>
-                                <span class="comment" title="文章评论次数" data-toggle="tooltip" data-placement="bottom">
+                                <span class="views" title="文章阅读数" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-eye fa-fw"></i>浏览(${item.lookCount!(0)})</span>
+                                <span class="comment" title="文章评论数" data-toggle="tooltip" data-placement="bottom">
                                     <a href="${config.siteUrl}/article/${item.id?c}#comment-box" rel="external nofollow">
                                         <i class="fa fa-comments-o fa-fw"></i>评论(${item.commentCount!(0)})
                                     </a>
@@ -191,7 +191,7 @@
                             </span>
                             <div class="clear"></div>
                             <span class="entry-more">
-                                <a href="${config.siteUrl}/article/${item.id?c}" rel="bookmark" title="点击查看文章详情" data-toggle="tooltip" data-placement="bottom">阅读全文</a>
+                                <a href="${config.siteUrl}/article/${item.id?c}" rel="bookmark">阅读全文</a>
                             </span>
                         </div>
                     </article>

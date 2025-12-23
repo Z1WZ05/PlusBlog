@@ -358,5 +358,69 @@
 .navbar-default .menu-box .navbar-collapse ul li a:hover,
 .navbar-default .menu-box .navbar-collapse ul li .menu_a:hover,
 .nav-fixed .menu_a:hover {
-    color: #fe9600 !important; /* 确保悬停时变成 Sakura 的橙色 */
+    color: #fe9600 !important; /* 悬停时变橙色 */
+}
+/* 修改 Tooltip 背景 */
+.tooltip-inner {
+    background-color: #fe9600 !important;
+    color: #fff !important;
+    padding: 7px 12px !important;
+    border-radius: 10px !important; /* 增加圆角 */
+    font-size: 12px !important;
+    font-family: 'Ubuntu', 'Source Sans Pro', sans-serif !important;
+    letter-spacing: 0.05em;
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: #fe9600 !important;
+}
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #fe9600 !important;
+}
+
+/* 输入框去框化与圆角 */
+.searchForm .form-control {
+    border: 1px solid #eee !important;
+    border-radius: 30px 0 0 30px !important; /* 左侧大圆角 */
+    padding: 10px 20px !important;
+    height: 45px !important;
+    box-shadow: none !important;
+    transition: all 0.3s;
+}
+
+/* 输入框获取焦点时 */
+.searchForm .form-control:focus {
+    border-color: #ff6d6d !important; /* 变为樱花粉 */
+}
+
+/* 搜索按钮美化 */
+.searchForm .nav-search-btn {
+    background-color: #ff6d6d !important; /* 樱花粉背景 */
+    color: #fff !important;
+    border: 1px solid #ff6d6d !important;
+    border-radius: 0 30px 30px 0 !important; /* 右侧大圆角 */
+    height: 45px !important;
+    padding: 0 25px !important;
+    transition: all 0.3s;
+}
+
+.searchForm .nav-search-btn:hover {
+    background-color: #fe9600 !important; /* 悬停变橙色 */
+    border-color: #fe9600 !important;
+}
+/* 模仿 Sakura 的标签样式 */
+.search-hot li a .label-info {
+    background-color: rgba(255, 109, 109, 0.1) !important; /* 浅粉色背景 */
+    color: #ff6d6d !important; /* 粉色文字 */
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-weight: normal;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.search-hot li a:hover .label-info {
+    background-color: #ff6d6d !important;
+    color: #fff !important;
+    box-shadow: 0 5px 10px rgba(255, 109, 109, 0.2);
 }

@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-sm-12 col-md-12" style="margin: 0 auto;float: initial">
                     <section class="links none-bg">
-                        <ul class="list-unstyled list-inline">
+                        <ul class="list-unstyled list-inline link-list">
                         <#list link.indexList as item>
                             <li>
                                 <a href="${item.url}" target="_blank" title="${item.description}" data-toggle="tooltip" data-placement="bottom">

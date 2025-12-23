@@ -10,19 +10,24 @@
 body {
     cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/normal.cur), auto;
 }
+body {
 
-a:hover , img:hover , li:hover,span:hover,h2:hover{
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', 'source-han-serif-sc', 'PT Serif', 'SongTi SC', 'MicroSoft Yahei', Georgia, serif !important;
+    -webkit-font-smoothing: antialiased; /* 让字体看起来更平滑 */
+    -moz-osx-font-smoothing: grayscale;
+}
+img:hover , li:hover,span:hover{
     cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/ayuda.cur), pointer;
 }
-/* 1. 定义动画 */
+/* 动画 */
 @keyframes main-fade-in {
     0% { opacity: 0; transform: translateY(50px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* 2. 应用到主体内容容器 */
+/* 文章列表向上滑入 */
 .blog-body {
-    animation: main-fade-in 1s; /* 使文章列表向上滑入 */
+    animation: main-fade-in 1s;
 }
 
 
@@ -41,7 +46,7 @@ a:hover , img:hover , li:hover,span:hover,h2:hover{
 ul, ol {
     list-style-type: none;
     -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
+    -webkit-margin-after: 0;++
     -webkit-margin-start: 0;
     -webkit-margin-end: 0;
     -webkit-padding-start: 0;
@@ -430,11 +435,7 @@ pre {
 }
 
 /* 鼠标聚焦状态 */
-a:hover {
-    color: #fe9600 !important;
-    /*font-weight: bold;*/
-    text-decoration: none;
-}
+
 
 a {
     color: rgb(153, 153, 153);
@@ -1220,7 +1221,7 @@ article header h2 {
     vertical-align: baseline;
 }
 
-article header h2 a {
+article header a h2 {
     color: #555 !important;
     font-size: 18px;
     line-height: 24px;
@@ -2128,10 +2129,12 @@ nav a:first-child .meta-nav {
         padding-left: 8px;
     }
 
-    article header h2 a {
+    article header a h2 {
         font-size: 15px;
     }
-
+    article header a h2:hover{
+        color: #fe9600 !important;
+    }
     .entry-more, article .entry-content .archive-content, article .thumbnail span.cat, article .entry-content .title-l, article .entry-content .entry-meta .date {
         display: none;
     }
@@ -3789,4 +3792,9 @@ article {
 article:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+a:hover , a h2:hover{
+    color: #fe9600 !important;
+    /*font-weight: bold;*/
+    cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/ayuda.cur), pointer;
 }
