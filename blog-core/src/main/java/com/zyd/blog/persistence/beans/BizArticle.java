@@ -3,6 +3,7 @@ package com.zyd.blog.persistence.beans;
 import com.zyd.blog.framework.object.AbstractDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import javax.persistence.Transient;
 import java.util.List;
@@ -23,6 +24,9 @@ public class BizArticle extends AbstractDO {
     BizType bizType;
     private String title;
     private Long userId;
+    @Getter
+    @Transient
+    private SysUser author;
     private String coverImage;
     private String qrcodePath;
     @Deprecated
@@ -48,4 +52,5 @@ public class BizArticle extends AbstractDO {
     private Integer commentCount;
     @Transient
     private Integer loveCount;
+
 }

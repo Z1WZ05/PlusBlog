@@ -40,13 +40,16 @@
             <div class="box-card">
                 <div class="box-header">
                     <i class="fa fa-id-card-o"></i> 个人资料
-                    <!-- 切换按钮：仅控制文本资料的修改 -->
+                    <#if isSelf>
+                        <!-- 切换按钮：仅控制文本资料的修改 -->
                     <button class="btn btn-primary btn-xs pull-right" id="btnEdit" onclick="switchMode('edit')">
                         <i class="fa fa-pencil"></i> 修改资料
                     </button>
                     <button class="btn btn-default btn-xs pull-right" id="btnCancel" onclick="switchMode('view')" style="display: none;">
                         <i class="fa fa-undo"></i> 取消修改
                     </button>
+                    </#if>
+
                 </div>
                 <div class="box-body">
 
@@ -106,11 +109,13 @@
             <!-- 我的文章板块 -->
             <div class="box-card">
                 <div class="box-header">
-                    <i class="fa fa-book"></i> 我的文章
-                    <!-- 写文章入口 -->
-                    <a href="/user/article/write" class="btn btn-success btn-xs pull-right">
-                        <i class="fa fa-plus"></i> 写文章
-                    </a>
+                    <i class="fa fa-book"></i> 发表文章
+                    <#if isSelf>
+                        <!-- 写文章入口 -->
+                        <a href="/user/article/write" class="btn btn-success btn-xs pull-right">
+                            <i class="fa fa-plus"></i> 写文章
+                        </a>
+                    </#if>
                 </div>
                 <div class="box-body" style="padding: 0 20px;">
                     <#if pageInfo?? && pageInfo.list?? && pageInfo.list?size gt 0>
@@ -121,7 +126,7 @@
 
                                 <div class="article-meta">
                                     <span style="margin-right: 15px;"><i class="fa fa-calendar"></i> ${item.createTime?string('yyyy-MM-dd HH:mm')}</span>
-                                    <span style="margin-right: 15px;"><i class="fa fa-eye"></i> ${item.lookCount!0} 阅读</span>
+                                    <span style="margin-right: 15px;"><i class="fa fa-eye"></i> ${item.lookCount} 阅读</span>
                                     <!-- 状态标签 -->
                                     <#if item.status == 1>
                                         <span class="status-badge status-success">已发布</span>
@@ -129,7 +134,7 @@
                                         <span class="status-badge status-draft">草稿</span>
                                     </#if>
                                 </div>
-
+                                <#if isSelf>
                                 <!-- 操作按钮组 (右浮动) -->
                                 <div class="article-actions">
                                     <#if item.status == 0>
@@ -140,6 +145,7 @@
                                     <!-- 所有状态都可以删除 -->
                                     <button class="btn btn-xs btn-danger" onclick="deleteArticle(${item.id?c})" title="删除"><i class="fa fa-trash"></i></button>
                                 </div>
+                                </#if>
                             </div>
                         </#list>
                     <#else>

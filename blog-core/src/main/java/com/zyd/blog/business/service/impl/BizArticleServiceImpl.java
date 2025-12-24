@@ -480,4 +480,17 @@ public class BizArticleServiceImpl implements BizArticleService {
         }
         return list;
     }
+    @Override
+    public List<Article> listByUserId(Long userId){
+        List<BizArticle> entityList = bizArticleMapper.listByUserId(userId);
+        if (CollectionUtils.isEmpty(entityList)) {
+            return null;
+        }
+        List<Article> list = new ArrayList<>();
+        for (BizArticle entity : entityList) {
+            list.add(new Article(entity));
+        }
+        return list;
+    }
+
 }

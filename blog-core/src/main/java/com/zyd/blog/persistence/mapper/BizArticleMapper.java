@@ -82,4 +82,5 @@ public interface BizArticleMapper extends BaseMapper<BizArticle> {
      */
     int batchUpdateStatus(@Param("list") List<Long> list, @Param("status") boolean status);
 
+    List<BizArticle> listByUserId(@Param("userId") Long userId);
 }

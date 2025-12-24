@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.zyd.blog.business.entity.Article;
 import com.zyd.blog.business.vo.ArticleConditionVO;
 import com.zyd.blog.framework.object.AbstractService;
+import com.zyd.blog.persistence.beans.BizArticle;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -123,5 +124,7 @@ public interface BizArticleService extends AbstractService<Article, Long> {
      * @param status
      */
     void batchUpdateStatus(Long[] ids, boolean status);
+
+    List<Article> listByUserId(Long userId);
 
 }

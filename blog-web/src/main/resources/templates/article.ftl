@@ -42,6 +42,19 @@
                     <h1 class="blog-info-title">
                         <strong>${article.title}</strong>
                     </h1>
+                    <#if article.author??>
+                        <div class="article-author" style="margin: 10px 0; color: #888;">
+                            <img src="${article.author.avatar!'/img/default.png'}"
+                                 style="width:32px;height:32px;border-radius:50%;vertical-align:middle;"
+                                 onerror="this.src='${config.staticWebSite}/img/default.png'"/>
+
+                            <span style="margin-left:8px;">
+            作者：
+            <strong>${article.author.nickname!article.author.username}</strong>
+        </span>
+                        </div>
+                    </#if>
+
                     <div class="blog-info-body ${article.isMarkdown?string('markdown-body editor-preview-active-side', '')}">
                         <#-- 文章最后修改日期的判断 -->
                         <#assign intervalDayNum=((.now?long - article.updateTime?long)?abs / (1000 * 60 * 60 * 24))?int>

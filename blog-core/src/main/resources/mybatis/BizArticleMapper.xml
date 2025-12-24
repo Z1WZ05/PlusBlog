@@ -34,6 +34,13 @@
 			<result property="icon" jdbcType="VARCHAR" column="btype_icon"/>
 			<result property="description" jdbcType="VARCHAR" column="btype_description"/>
 		</association>
+		<association property="author"
+					 javaType="com.zyd.blog.persistence.beans.SysUser">
+			<result property="id" column="u_id"/>
+			<result property="username" column="u_username"/>
+			<result property="nickname" column="u_nickname"/>
+			<result property="avatar" column="u_avatar"/>
+		</association>
 		<collection property="tags" column="tag_id" javaType="ArrayList" ofType="com.zyd.blog.persistence.beans.BizTags">
 			<result property="id" jdbcType="BIGINT" column="tag_id"/>
 			<result property="name" jdbcType="VARCHAR" column="tag_name"/>
@@ -65,11 +72,16 @@
 			btype.id AS btype_id,
 			btype.`name` AS btype_name,
 			btype.`icon` AS btype_icon,
-			btype.description AS btype_description
+			btype.description AS btype_description,
+			u.id        AS u_id,
+			u.username  AS u_username,
+			u.nickname  AS u_nickname,
+			u.avatar    AS u_avatar
 		FROM
             biz_article a
 		INNER JOIN biz_type btype ON a.type_id = btype.id
 		INNER JOIN biz_article_tags atag ON a.id = atag.article_id
+		LEFT JOIN sys_user u ON a.user_id = u.id
 		WHERE 1 = 1
         <if test="typeId != null">
             AND	a.type_id = #{typeId}
@@ -164,21 +176,35 @@
 			a.`required_auth`,
 			a.create_time,
 			a.update_time,
+
+			/* ===== 作者信息（新增） ===== */
+			u.id        AS u_id,
+			u.username  AS u_username,
+			u.nickname  AS u_nickname,
+			u.avatar    AS u_avatar,
+
+			/* ===== 分类 ===== */
 			btype.id AS btype_id,
 			btype.`name` AS btype_name,
 			btype.description AS btype_description,
+
+			/* ===== 标签 ===== */
 			t.id AS tag_id,
 			t.`name` AS tag_name,
 			t.description AS tag_description
-		FROM
-			biz_article a
-		INNER JOIN biz_article_content bcontent ON a.id = bcontent.article_id
-		INNER JOIN biz_type btype ON a.type_id = btype.id
-		INNER JOIN biz_article_tags atag ON a.id = atag.article_id
-		LEFT JOIN biz_tags t ON atag.tag_id = t.id
-		WHERE
-			a.id = #{id}
+
+		FROM biz_article a
+				 INNER JOIN biz_article_content bcontent ON a.id = bcontent.article_id
+				 INNER JOIN biz_type btype ON a.type_id = btype.id
+
+			/* ===== 新增：作者表 ===== */
+				 LEFT JOIN sys_user u ON a.user_id = u.id
+
+				 INNER JOIN biz_article_tags atag ON a.id = atag.article_id
+				 LEFT JOIN biz_tags t ON atag.tag_id = t.id
+		WHERE a.id = #{id}
 	</select>
+
 
 	<!-- 获取上一篇和下一篇文章 -->
 	<select id="getPrevAndNextArticles"  parameterType="Date" resultMap="rm">
@@ -283,5 +309,20 @@
 		ORDER BY
 			a.update_time DESC
 	</select>
+<!--listByUserId	-->
+	<select id="listByUserId" resultMap="rm">
+		SELECT
+			a.id,
+			a.title,
+			a.user_id,
+			a.create_time,
+			a.status,
+			l.look_count
+		FROM biz_article a
+				 LEFT JOIN biz_article_look_v2 l ON a.id = l.article_id
+		WHERE a.user_id = #{userId}
+		ORDER BY a.create_time DESC
+	</select>
+
 </mapper>
 

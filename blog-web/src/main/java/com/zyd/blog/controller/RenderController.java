@@ -8,6 +8,7 @@ import com.zyd.blog.business.enums.ArticleStatusEnum;
 import com.zyd.blog.business.enums.PlatformEnum;
 import com.zyd.blog.business.service.*;
 import com.zyd.blog.business.vo.ArticleConditionVO;
+import com.zyd.blog.persistence.beans.BizArticle;
 import com.zyd.blog.util.ArticleUtil;
 import com.zyd.blog.util.ResultUtil;
 import com.zyd.blog.util.SessionUtil;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -208,6 +210,15 @@ public class RenderController {
         model.addAttribute("relatedList", bizArticleService.listRelatedArticle(SIDEBAR_ARTICLE_SIZE, article));
         model.addAttribute("articleDetail", true);
         return ResultUtil.view("article");
+    }
+    @RestController
+    @RequestMapping("/api/article")
+    public class ArticleApiController {
+
+        @GetMapping("/{articleId}")
+        public Article get(@PathVariable("articleId") Long articleId) {
+            return bizArticleService.getByPrimaryKey(articleId);
+        }
     }
 
     /**

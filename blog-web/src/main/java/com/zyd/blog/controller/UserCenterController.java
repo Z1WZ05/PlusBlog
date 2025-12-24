@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -55,25 +56,11 @@ public class UserCenterController {
         Article condition = new Article();
         condition.setUserId(user.getId());
 
-        // 2. 调用最基础的 list 方法
-        // 注意：这里我们不再用 findPageBreakByCondition，而是用基础的 list 或 findList
-        // 请尝试输入 articleService.list(condition)
-        // 如果 list 报红，请尝试 articleService.findList(condition)
-        java.util.List<Article> allArticles = articleService.listAll();
-        java.util.List<Article> myArticles = new java.util.ArrayList<>();
-
-        if (allArticles != null) {
-            for (Article art : allArticles) {
-                // 注意判空，防止报错
-                if (art.getUserId() == user.getId()) {
-                    myArticles.add(art);
-                }
-            }
-        }
+        List<Article> myArticles = articleService.listByUserId(user.getId());
 
         PageInfo<Article> pageInfo = new PageInfo<>(myArticles);
         model.addAttribute("pageInfo", pageInfo);
-
+        model.addAttribute("isSelf", true);
         return "user/profile";
     }
 
@@ -146,4 +133,29 @@ public class UserCenterController {
             return ResultUtil.error("上传失败: " + e.getMessage());
         }
     }
+
+    @GetMapping("/{userId}")
+    public String userHome(
+            @PathVariable Long userId,
+            Model model,
+            HttpSession session,
+            @RequestParam(defaultValue = "1") int pageNum
+    ) {
+        User user = userService.getByPrimaryKey(userId);
+        if (user == null) {
+            return "error/404";
+        }
+
+        List<Article> myArticles = articleService.listByUserId(user.getId());
+        PageInfo<Article> pageInfo = new PageInfo<>(myArticles);
+        model.addAttribute("user", user);
+        model.addAttribute("pageInfo", pageInfo);
+
+        User currentUser = (User) session.getAttribute("user");
+        model.addAttribute("isSelf",
+                currentUser != null && currentUser.getId().equals(userId));
+
+        return "user/profile";
+    }
+
 }

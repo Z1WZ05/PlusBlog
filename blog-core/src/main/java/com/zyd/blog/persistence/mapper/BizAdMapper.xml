@@ -33,6 +33,7 @@
 			t.update_time
 		FROM
 			biz_ad t
+
 		WHERE
 			1 = 1
 		ORDER BY t.create_time DESC

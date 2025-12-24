@@ -6,6 +6,7 @@ import com.zyd.blog.business.enums.ArticleStatusEnum;
 import com.zyd.blog.persistence.beans.BizArticle;
 import com.zyd.blog.persistence.beans.BizTags;
 import com.zyd.blog.persistence.beans.BizType;
+import com.zyd.blog.persistence.beans.SysUser;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -242,6 +243,7 @@ public class Article {
         return lookCount == null ? 0 : lookCount;
     }
 
+
     public int getCommentCount() {
         Integer commentCount = this.bizArticle.getCommentCount();
         return commentCount == null ? 0 : commentCount;
@@ -265,6 +267,13 @@ public class Article {
     public Article setLoveCount(int count) {
         this.bizArticle.setLoveCount(count);
         return this;
+    }
+    public SysUser getAuthor() {
+        return this.bizArticle.getAuthor();
+    }
+
+    public void setAuthor(SysUser author) {
+        this.bizArticle.setAuthor(author);
     }
 }
 
