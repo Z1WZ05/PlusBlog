@@ -202,11 +202,11 @@
                 <article class="fade-in" style="height: auto">
                     <div class="rows">
                         <div class="col-md-10 col-sm-12">
-                            <div class="h3 text-center">亲，啥也没找到啊~~<img src="http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif" alt="[囧]"></div>
-                            <div class="h5 text-center">换个姿势，再来一次~~</div>
+                            <div class="h3 text-center">这里还啥都没有</div>
+                            <div class="h5 text-center">欢迎来到知识的荒原</div>
                         </div>
                         <div class="col-md-2 col-sm-12">
-                            <img src="${config.staticWebSite}/img/wrong.gif" class="center-block" alt="惩罚我" style="width: 110px;margin-top: -10px;">
+                            <img src="${config.staticWebSite}/img/spidermao.gif" class="center-block" alt="惩罚我" style="width: 110px;margin-top: -10px;">
                         </div>
                     </div>
                     <form action="/" method="post" class="form-horizontal searchForm">
