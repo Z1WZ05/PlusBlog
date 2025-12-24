@@ -44,6 +44,7 @@
                     </h1>
                     <#if article.author??>
                         <div class="article-author" style="margin: 10px 0; color: #888;">
+                            <a href="/user/${article.author.id}" class="article-author">
                             <img src="${article.author.avatar!'/img/default.png'}"
                                  style="width:32px;height:32px;border-radius:50%;vertical-align:middle;"
                                  onerror="this.src='${config.staticWebSite}/img/default.png'"/>
@@ -51,7 +52,19 @@
                             <span style="margin-left:8px;">
             作者：
             <strong>${article.author.nickname!article.author.username}</strong>
-        </span>
+        </span></a>
+                            <#if currentUser?? && currentUser.id != article.author.id>
+
+                                <button id="follow-btn" class="btn btn-primary" data-followed="${followed?string('1','0')}" ONCLICK="subscribe(${article.author.id})">
+                                    <#if followed>
+                                        已关注
+                                    <#else>
+                                        关注
+                                    </#if>
+
+                                </button>
+
+                            </#if>
                         </div>
                     </#if>
 

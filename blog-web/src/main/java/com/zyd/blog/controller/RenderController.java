@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +50,8 @@ public class RenderController {
     private SysLinkService sysLinkService;
     @Autowired
     private SysUpdateRecordeService updateRecordeService;
-
+    @Autowired
+    private BizUserFollowService userFollowService;
     /**
      * 加载首页的数据
      *
@@ -184,7 +186,7 @@ public class RenderController {
      */
     @GetMapping("/article/{articleId}")
     @BussinessLog(value = "进入文章[{2}]详情页", platform = PlatformEnum.WEB)
-    public ModelAndView article(Model model, @PathVariable("articleId") Long articleId) {
+    public ModelAndView article(Model model, @PathVariable("articleId") Long articleId, HttpSession session) {
         Article article = bizArticleService.getByPrimaryKey(articleId);
         if (article == null || ArticleStatusEnum.UNPUBLISHED.getCode() == article.getStatusEnum().getCode()) {
             return ResultUtil.forward("/error/404");
@@ -203,6 +205,13 @@ public class RenderController {
                 article.setRequiredAuth(false);
             }
         }
+        User currentUser = (User) session.getAttribute("user");
+        boolean followed = false;
+        if (currentUser != null) {
+            followed = userFollowService.isFollowed(currentUser.getId(), article.getAuthor().getId());
+        }
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("followed", followed);
         model.addAttribute("article", article);
         // 上一篇下一篇
         model.addAttribute("other", bizArticleService.getPrevAndNextArticles(article.getCreateTime()));
@@ -210,15 +219,6 @@ public class RenderController {
         model.addAttribute("relatedList", bizArticleService.listRelatedArticle(SIDEBAR_ARTICLE_SIZE, article));
         model.addAttribute("articleDetail", true);
         return ResultUtil.view("article");
-    }
-    @RestController
-    @RequestMapping("/api/article")
-    public class ArticleApiController {
-
-        @GetMapping("/{articleId}")
-        public Article get(@PathVariable("articleId") Long articleId) {
-            return bizArticleService.getByPrimaryKey(articleId);
-        }
     }
 
     /**

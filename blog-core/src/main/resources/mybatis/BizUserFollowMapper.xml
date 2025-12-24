@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zyd.blog.persistence.mapper.BizUserFollowMapper">
+
+    <!-- ================== 结果映射 ================== -->
+    <resultMap id="rm" type="com.zyd.blog.persistence.beans.BizUserFollow">
+        <id property="id" column="id"/>
+        <result property="followerId" column="follower_id"/>
+        <result property="followedId" column="followed_id"/>
+        <result property="createTime" column="create_time"/>
+
+        <!-- 关注者信息 -->
+        <association property="follower"
+                     javaType="com.zyd.blog.persistence.beans.SysUser">
+            <id property="id" column="follower_id"/>
+            <result property="nickname" column="follower_nickname"/>
+            <result property="avatar" column="follower_avatar"/>
+        </association>
+
+        <!-- 被关注者信息 -->
+        <association property="followed"
+                     javaType="com.zyd.blog.persistence.beans.SysUser">
+            <id property="id" column="followed_id"/>
+            <result property="nickname" column="followed_nickname"/>
+            <result property="avatar" column="followed_avatar"/>
+        </association>
+    </resultMap>
+
+    <!-- ================== 新增关注 ================== -->
+    <insert id="insert" parameterType="com.zyd.blog.business.entity.UserFollow">
+        INSERT INTO biz_user_follow (
+            follower_id,
+            followed_id,
+            create_time
+        ) VALUES (
+                     #{followerId},
+                     #{followedId},
+                     NOW()
+                 )
+    </insert>
+
+    <!-- ================== 取消关注 ================== -->
+    <delete id="delete">
+        DELETE FROM biz_user_follow
+        WHERE follower_id = #{followerId}
+          AND followed_id = #{followedId}
+    </delete>
+
+    <!-- ================== 是否已关注 ================== -->
+    <select id="countByFollowerAndFollowed" resultType="int">
+        SELECT COUNT(1)
+        FROM biz_user_follow
+        WHERE follower_id = #{followerId}
+          AND followed_id = #{followedId}
+    </select>
+
+    <!-- ================== 粉丝数 ================== -->
+    <select id="countFollowers" resultType="int">
+        SELECT COUNT(1)
+        FROM biz_user_follow
+        WHERE followed_id = #{userId}
+    </select>
+
+    <!-- ================== 关注数 ================== -->
+    <select id="countFollowing" resultType="int">
+        SELECT COUNT(1)
+        FROM biz_user_follow
+        WHERE follower_id = #{userId}
+    </select>
+
+    <!-- ================== 粉丝列表 ================== -->
+    <select id="listFollower" resultMap="rm">
+        SELECT
+            f.id,
+            f.follower_id,
+            f.followed_id,
+            f.create_time,
+
+            u1.nickname AS follower_nickname,
+            u1.avatar   AS follower_avatar
+        FROM biz_user_follow f
+                 LEFT JOIN sys_user u1 ON f.follower_id = u1.id
+        WHERE f.followed_id = #{userId}
+        ORDER BY f.create_time DESC
+    </select>
+
+    <!-- ================== 关注列表 ================== -->
+    <select id="listFollowing" resultMap="rm">
+        SELECT
+            f.id,
+            f.follower_id,
+            f.followed_id,
+            f.create_time,
+
+            u2.nickname AS followed_nickname,
+            u2.avatar   AS followed_avatar
+        FROM biz_user_follow f
+                 LEFT JOIN sys_user u2 ON f.followed_id = u2.id
+        WHERE f.follower_id = #{userId}
+        ORDER BY f.create_time DESC
+    </select>
+
+</mapper>

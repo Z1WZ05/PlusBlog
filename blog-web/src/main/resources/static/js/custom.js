@@ -60,3 +60,24 @@ $(function () {
         $bgImg.attr('src', bgList[bgIndex]);
     });
 });
+function subscribe(authorId) {
+    let btn = document.getElementById('follow-btn');
+    let followed = btn.dataset.followed === '1';
+
+    let url = followed ? '/follow/remove' : '/follow/add';
+
+    $.post(url, { authorId: authorId })
+        .done(function () {
+            if (followed) {
+                btn.innerText = '关注';
+                btn.dataset.followed = '0';
+            } else {
+                btn.innerText = '已关注';
+                btn.dataset.followed = '1';
+            }
+        })
+        .fail(function () {
+            alert('请先登录');
+        });
+    location.reload()
+}

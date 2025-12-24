@@ -7,12 +7,14 @@ import com.zyd.blog.business.entity.Article;
 import com.zyd.blog.business.entity.User;
 // 2. 修正 Service 引用 (根据你的要求，使用 SysUserService 和 BizArticleService)
 import com.zyd.blog.business.service.BizArticleService;
+import com.zyd.blog.business.service.BizUserFollowService;
 import com.zyd.blog.business.service.SysUserService;
 // 3. 结果返回工具 (尝试引用 ResponseVO，如果爆红请看代码末尾的注释)
 import com.zyd.blog.business.vo.ArticleConditionVO;
 import com.zyd.blog.util.ResultUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +37,9 @@ public class UserCenterController {
     @Autowired
     private BizArticleService articleService; // Service 是 BizArticleService
 
+    @Autowired
+    private BizUserFollowService userFollowService;
+
     /**
      * 1. 个人中心页面
      */
@@ -46,6 +51,9 @@ public class UserCenterController {
         if (currentUser == null) {
             return "redirect:/login";
         }
+        int followerCount = userFollowService.countFollowers(currentUser.getId());
+        int followingCount = userFollowService.countFollowing(currentUser.getId());
+
 
         // 重新查询用户信息
         // 方法名推测：标准 MyBatis 生成的方法通常叫 selectByPrimaryKey
@@ -61,6 +69,8 @@ public class UserCenterController {
         PageInfo<Article> pageInfo = new PageInfo<>(myArticles);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("isSelf", true);
+        model.addAttribute("followerCount", followerCount);
+        model.addAttribute("followingCount", followingCount);
         return "user/profile";
     }
 
@@ -150,12 +160,51 @@ public class UserCenterController {
         PageInfo<Article> pageInfo = new PageInfo<>(myArticles);
         model.addAttribute("user", user);
         model.addAttribute("pageInfo", pageInfo);
-
+        int followerCount = userFollowService.countFollowers(userId);
+        int followingCount = userFollowService.countFollowing(userId);
+        model.addAttribute("followerCount", followerCount);
+        model.addAttribute("followingCount", followingCount);
         User currentUser = (User) session.getAttribute("user");
+        boolean followed = false;
+        if (currentUser != null) {
+            followed = userFollowService.isFollowed(currentUser.getId(), userId);
+        }
+        model.addAttribute("hostUserId", userId);
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("followed", followed);
         model.addAttribute("isSelf",
                 currentUser != null && currentUser.getId().equals(userId));
 
         return "user/profile";
     }
+
+    @RestController
+    @RequestMapping("/follow")
+    public class FollowController {
+
+        @Autowired
+        private BizUserFollowService followService;
+
+        @PostMapping("/add")
+        public ResponseEntity<?> follow(Long authorId, HttpSession session) {
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                return ResponseEntity.status(401).build();
+            }
+            followService.follow(user.getId(), authorId);
+            return ResponseEntity.ok().build();
+        }
+
+        @PostMapping("/remove")
+        public ResponseEntity<?> unfollow(Long authorId, HttpSession session) {
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                return ResponseEntity.status(401).build();
+            }
+            followService.unfollow(user.getId(), authorId);
+            return ResponseEntity.ok().build();
+        }
+    }
+
 
 }

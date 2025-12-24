@@ -181,7 +181,7 @@
                                 ${item.description!}
                             </div>
                             <span class="entry-meta">
-                                <span class="date" title="作者" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-user fa-fw"></i>${item.author.nickname}</span>
+                                <span class="date" title="作者" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-user fa-fw"></i><a href="/user/${item.author.id}" class="article-author">${item.author.nickname}</span>
                                 <span class="date" title="文章发表日期" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-clock-o fa-fw"></i>${item.createTime?string('yyyy-MM-dd')}</span>
                                 <span class="views" title="文章阅读数" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-eye fa-fw"></i>浏览(${item.lookCount!(0)})</span>
                                 <span class="comment" title="文章评论数" data-toggle="tooltip" data-placement="bottom">

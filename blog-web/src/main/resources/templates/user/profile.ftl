@@ -12,11 +12,33 @@
                     <!-- 头像区域 -->
                     <div class="avatar-wrapper" onclick="$('#fileInput').click()">
                         <img id="avatarImg" src="${(user.avatar)!('/assets/img/default-avatar.png')}" class="user-avatar">
+                        <#if isSelf>
                         <div class="avatar-mask"><i class="fa fa-camera"></i> 更换</div>
+                        </#if>
                     </div>
-                    <!-- 隐藏的文件上传框 -->
-                    <input type="file" id="fileInput" style="display: none;" onchange="uploadAvatar()">
+                    <p>
+                        关注：${followingCount}
+                        |
+                        粉丝：${followerCount}
+                    </p>
+                    <#-- 已登录 && 不是本人 才显示关注按钮 -->
+                    <#if currentUser?? && !isSelf>
 
+                        <button id="follow-btn" class="btn btn-primary" data-followed="${followed?string('1','0')}" ONCLICK="subscribe(${hostUserId})">
+                            <#if followed>
+                                已关注
+                            <#else>
+                                关注
+                            </#if>
+
+                        </button>
+
+                    </#if>
+
+                    <!-- 隐藏的文件上传框 -->
+                    <#if isSelf>
+                    <input type="file" id="fileInput" style="display: none;" onchange="uploadAvatar()">
+                    </#if>
                     <div class="user-name">${user.nickname!'测试用户'}</div>
                     <div class="user-bio">${(user.remark)!('这个人很懒，什么都没写')}</div>
 
@@ -30,6 +52,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -151,7 +174,7 @@
                     <#else>
                         <div style="text-align: center; padding: 40px; color: #999;">
                             <i class="fa fa-file-text-o fa-2x"></i>
-                            <p style="margin-top: 10px;">暂无发布的文章，快去写一篇吧！</p>
+                            <p style="margin-top: 10px;">暂无发布的文章</p>
                         </div>
                     </#if>
                 </div>
@@ -277,4 +300,5 @@
             });
         });
     }
+
 </script>
