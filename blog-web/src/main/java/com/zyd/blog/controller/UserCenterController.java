@@ -6,11 +6,13 @@ import com.github.pagehelper.PageInfo;
 import com.zyd.blog.business.entity.Article;
 import com.zyd.blog.business.entity.User;
 // 2. 修正 Service 引用 (根据你的要求，使用 SysUserService 和 BizArticleService)
+import com.zyd.blog.business.entity.UserFollow;
 import com.zyd.blog.business.service.BizArticleService;
 import com.zyd.blog.business.service.BizUserFollowService;
 import com.zyd.blog.business.service.SysUserService;
 // 3. 结果返回工具 (尝试引用 ResponseVO，如果爆红请看代码末尾的注释)
 import com.zyd.blog.business.vo.ArticleConditionVO;
+import com.zyd.blog.persistence.beans.BizUserFollow;
 import com.zyd.blog.util.ResultUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +69,10 @@ public class UserCenterController {
         List<Article> myArticles = articleService.listByUserId(user.getId());
 
         PageInfo<Article> pageInfo = new PageInfo<>(myArticles);
+        List<BizUserFollow> followers = userFollowService.listMyFollowers(user.getId());
+        List<BizUserFollow> following = userFollowService.listMyFollowing(user.getId());
+        model.addAttribute("followers", followers);
+        model.addAttribute("following", following);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("isSelf", true);
         model.addAttribute("followerCount", followerCount);
@@ -162,6 +168,11 @@ public class UserCenterController {
         model.addAttribute("pageInfo", pageInfo);
         int followerCount = userFollowService.countFollowers(userId);
         int followingCount = userFollowService.countFollowing(userId);
+        List<BizUserFollow> followers = userFollowService.listMyFollowers(userId);
+        List<BizUserFollow> following = userFollowService.listMyFollowing(userId);
+
+        model.addAttribute("followers", followers);
+        model.addAttribute("following", following);
         model.addAttribute("followerCount", followerCount);
         model.addAttribute("followingCount", followingCount);
         User currentUser = (User) session.getAttribute("user");

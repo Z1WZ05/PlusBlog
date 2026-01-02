@@ -63,22 +63,19 @@ public class BizUserFollowServiceImpl implements BizUserFollowService {
      * 我的关注
      */
     @Override
-    public PageInfo<UserFollow> listMyFollowing(Long userId, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
+    public List<BizUserFollow>  listMyFollowing(Long userId) {
 
         List<BizUserFollow> list = bizUserFollowMapper.listFollowing(userId);
-        return wrapPage(list);
+        return list;
     }
 
     /**
      * 我的粉丝
      */
     @Override
-    public PageInfo<UserFollow> listMyFollowers(Long userId, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-
+    public List<BizUserFollow> listMyFollowers(Long userId) {
         List<BizUserFollow> list = bizUserFollowMapper.listFollower(userId);
-        return wrapPage(list);
+        return list;
     }
     public int countFollowers(Long userId){
         int count = bizUserFollowMapper.countFollowers(userId);

@@ -3,6 +3,7 @@ package com.zyd.blog.business.service;
 import com.github.pagehelper.PageInfo;
 import com.zyd.blog.business.entity.User;
 import com.zyd.blog.business.entity.UserFollow;
+import com.zyd.blog.persistence.beans.BizUserFollow;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,11 +31,11 @@ public interface BizUserFollowService {
     /**
      * 我的关注列表
      */
-    PageInfo<UserFollow> listMyFollowing(Long userId, int pageNum, int pageSize);
+    List<BizUserFollow>  listMyFollowing(Long userId);
 
     /**
      * 我的粉丝列表
      */
-    PageInfo<UserFollow> listMyFollowers(Long userId, int pageNum, int pageSize);
+    List<BizUserFollow>  listMyFollowers(Long userId);
 }
 

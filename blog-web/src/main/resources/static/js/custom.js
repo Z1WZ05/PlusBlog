@@ -81,3 +81,4 @@ function subscribe(authorId) {
         });
     location.reload()
 }
+

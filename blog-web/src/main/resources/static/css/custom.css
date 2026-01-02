@@ -424,3 +424,55 @@
     color: #fff !important;
     box-shadow: 0 5px 10px rgba(255, 109, 109, 0.2);
 }
+
+
+.follow-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+
+
+.follow-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    border: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+
+.follow-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 2px;
+}
+
+
+.follow-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.2;
+}
+.follow-name :hover{
+    color: #FE9600;
+}
+
+.follow-desc {
+    font-size: 12px;
+    color: #999;
+    margin-top: 6px;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

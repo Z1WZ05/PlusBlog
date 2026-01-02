@@ -171,6 +171,8 @@
     <script type="text/javascript" src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js"></script>
     <script type="text/javascript" src="https://cdn.staticfile.org/js-xss/0.3.3/xss.min.js"></script>
     <script type="text/javascript" src="https://cdn.staticfile.org/mustache.js/2.3.0/mustache.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/layer/3.5.1/layer.js"></script>
+
 </#if>
 <script type="text/javascript">
     var appConfig = {

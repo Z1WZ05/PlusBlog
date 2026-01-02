@@ -11,16 +11,21 @@
                 <div class="box-body user-info-inner">
                     <!-- 头像区域 -->
                     <div class="avatar-wrapper" onclick="$('#fileInput').click()">
-                        <img id="avatarImg" src="${(user.avatar)!('/assets/img/default-avatar.png')}" class="user-avatar">
+                        <img id="avatarImg" src="${(user.avatar)!('${config.staticWebSite}/img/bg/241122.png')}" class="user-avatar">
                         <#if isSelf>
                         <div class="avatar-mask"><i class="fa fa-camera"></i> 更换</div>
                         </#if>
                     </div>
                     <p>
-                        关注：${followingCount}
+                        <a href="javascript:void(0)" onclick="showFollowing()">
+                            关注：${followingCount}
+                        </a>
                         |
-                        粉丝：${followerCount}
+                        <a href="javascript:void(0)" onclick="showFollowers()">
+                            粉丝：${followerCount}
+                        </a>
                     </p>
+
                     <#-- 已登录 && 不是本人 才显示关注按钮 -->
                     <#if currentUser?? && !isSelf>
 
@@ -181,6 +186,57 @@
             </div>
         </div>
     </div>
+
+    <!-- 关注 / 粉丝弹窗 -->
+    <div class="modal fade" id="followModal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="followModalTitle">列表</h4>
+                </div>
+                <div class="modal-body" id="followModalBody">
+
+                    <!-- 关注列表 -->
+                    <div id="followingList" class="follow-list" style="display:none;">
+                        <#if following?? && following?size gt 0>
+                            <#list following as f>
+                                <a class="follow-item" href="/user/${f.followed.id?c}">
+                                    <img src="${config.staticWebSite}/img/bg/241122.png" class="follow-avatar">
+                                    <div class="follow-info">
+                                        <div class="follow-name">${f.followed.nickname!'未命名用户'}</div>
+                                        <div class="follow-desc">${f.followed.remark!'这个人很神秘'}</div>
+                                    </div>
+                                </a>
+                            </#list>
+                        <#else>
+                            <div class="follow-empty">暂无关注</div>
+                        </#if>
+                    </div>
+
+                    <!-- 粉丝列表 -->
+                    <div id="followerList" class="follow-list" style="display:none;">
+                        <#if followers?? && followers?size gt 0>
+                            <#list followers as f>
+                                <a class="follow-item" href="/user/${f.follower.id?c}">
+                                    <img src="${config.staticWebSite}/img/bg/241122.png" class="follow-avatar">
+                                    <div class="follow-info">
+                                        <div class="follow-name">${f.follower.nickname!'未命名用户'}</div>
+                                        <div class="follow-desc">${f.follower.remark!'这个人很神秘'}</div>
+                                    </div>
+                                </a>
+                            </#list>
+                        <#else>
+                            <div class="follow-empty">暂无粉丝</div>
+                        </#if>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
     <@footer></@footer>
@@ -300,5 +356,19 @@
             });
         });
     }
+    function showFollowing() {
+        $("#followModalTitle").text("关注列表");
+        $("#followerList").hide();
+        $("#followingList").show();
+        $("#followModal").modal("show");
+    }
+
+    function showFollowers() {
+        $("#followModalTitle").text("粉丝列表");
+        $("#followingList").hide();
+        $("#followerList").show();
+        $("#followModal").modal("show");
+    }
+
 
 </script>
